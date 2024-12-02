@@ -1,0 +1,77 @@
+# Runnerz
+
+###
+# @name Get data
+# This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+# A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+GET http://localhost:8080/api/runs?
+    id=1
+
+> {%
+    // TODO: migrate to HTTP Client Response handler API
+    // pm.test("Status code is 200", function () {
+    //     pm.response.to.have.status(200);
+    // });
+%}
+
+###
+# @name Post data
+# This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+# A successful POST request typically returns a `200 OK` or `201 Created` response code.
+POST http://localhost:8080/api/run
+Content-Type: application/json
+
+{
+  "id": 90909,
+  "title": "a run",
+  "startedOn": "2024-11-29T19:05:21.123",
+  "completedOn": "2024-11-30T19:05:21.123",
+  "miles": 55,
+  "location": "Indoor"
+}
+
+> {%
+    // TODO: migrate to HTTP Client Response handler API
+    // pm.test("Successful POST request", function () {
+    //     pm.expect(pm.response.code).to.be.oneOf([200, 201]);
+    // });
+    //
+%}
+
+###
+# @name Update data
+# This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).
+# A successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code.
+PUT http://localhost:8080/api/run/update/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "FirstUpdated",
+  "startedOn": "2024-12-02T14:14:59.792303198",
+  "completedOn": "2024-12-02T18:14:59.792359215",
+  "miles": 4,
+  "location": "Indoor"
+}
+
+> {%
+    // TODO: migrate to HTTP Client Response handler API
+    // pm.test("Successful PUT request", function () {
+    //     pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);
+    // });
+    //
+%}
+
+###
+# @name Delete data
+# This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).
+# A successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code.
+DELETE http://localhost:8080/api/run/delete/90909
+
+> {%
+    // TODO: migrate to HTTP Client Response handler API
+    // pm.test("Successful DELETE request", function () {
+    //     pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);
+    // });
+    //
+%}
